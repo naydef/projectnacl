@@ -98,6 +98,7 @@ public:
 	float misc_chatspam_newlines;
 	float misc_cheatsbypass;
 	float misc_claymode;
+	float misc_speedcrouch;
 	float aimbot_resolver;
 	float aimbot_resolver_fakeup;
 	float hvh_switch;

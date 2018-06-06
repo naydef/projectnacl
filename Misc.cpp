@@ -62,6 +62,20 @@ void CMisc::Run(CBaseEntity* pLocal, CUserCmd* pCommand)
 		}
 	}
 
+	if (gCvars.misc_speedcrouch && !(pCommand->buttons & IN_ATTACK) && (pCommand->buttons & IN_DUCK)) // who changed my comment >:(
+	{
+		Vector vLocalAngles = pCommand->viewangles;
+		float speed = pCommand->forwardmove;
+		if (fabs(speed) > 0.0f) {
+			pCommand->forwardmove = -speed;
+			pCommand->sidemove = 0.0f;
+			pCommand->viewangles.y = vLocalAngles.y;
+			pCommand->viewangles.y -= 180.0f;
+			if (pCommand->viewangles.y < -180.0f) pCommand->viewangles.y += 360.0f;
+			pCommand->viewangles.z = 90.0f;
+		}
+	}
+
 	if (!(pLocal->GetFlags() & FL_ONGROUND) && pCommand->buttons & IN_JUMP)
 	{
 		//Autostrafe	
