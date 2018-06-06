@@ -214,7 +214,7 @@ void CCheatMenu::Render(void)
 			i = AddItem(i, "  * No Push", &gCvars.misc_nopush, 0, 1, 1, false);
 			i = AddItem(i, "  * Cheats Bypass", &gCvars.misc_cheatsbypass, 0, 1, 1, false);
 			i = AddItem(i, "  * Clay Mode", &gCvars.misc_claymode, 0, 1, 1, false);
-			i = AddItem(i, "  * Crouch Exploit", &gCvars.misc_claymode, 0, 1, 1, false);
+			i = AddItem(i, "  * Crouch Exploit", &gCvars.misc_speedcrouch, 0, 1, 1, false);
 			i = AddItem(i, "  * Chat Spam", &gCvars.misc_chatspam, 0, 1, 1, false);
 			if (gCvars.misc_chatspam)
 				i = AddItem(i, "   > New Lines", &gCvars.misc_chatspam_newlines, 0, 32, 1, false);
