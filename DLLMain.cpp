@@ -14,6 +14,7 @@ CreateInterface_t ClientFactory = NULL;
 CreateInterface_t VGUIFactory = NULL;
 CreateInterface_t VGUI2Factory = NULL;
 CreateInterface_t CvarFactory = NULL;
+CreateInterfaceFn SteamFactory = NULL;
 
 DWORD WINAPI dwMainThread( LPVOID lpArguments )
 {
@@ -27,6 +28,7 @@ DWORD WINAPI dwMainThread( LPVOID lpArguments )
 		EngineFactory = (CreateInterfaceFn)GetProcAddress(gSignatures.GetModuleHandleSafe("engine.dll"), "CreateInterface");
 		VGUIFactory = (CreateInterfaceFn)GetProcAddress(gSignatures.GetModuleHandleSafe("vguimatsurface.dll"), "CreateInterface");
 		CvarFactory = (CreateInterfaceFn)GetProcAddress(gSignatures.GetModuleHandleSafe("vstdlib.dll"), "CreateInterface");
+		SteamFactory = (CreateInterfaceFn)GetProcAddress(GetModuleHandleA("SteamClient.dll"), "CreateInterface");
 
 		gInts.Client = ( CHLClient* )ClientFactory( "VClient017", NULL);
 		gInts.EntList = ( CEntList* ) ClientFactory( "VClientEntityList003", NULL );
@@ -36,6 +38,13 @@ DWORD WINAPI dwMainThread( LPVOID lpArguments )
 		gInts.ModelInfo = ( IVModelInfo* ) EngineFactory( "VModelInfoClient006", NULL );
 		gInts.cvar = (ICvar*)CvarFactory("VEngineCvar004", NULL);
 		gInts.EventManager = (IGameEventManager2*)EngineFactory("GAMEEVENTSMANAGER002", NULL);
+		gInts.steamclient = (ISteamClient017*)SteamFactory("SteamClient017", NULL);
+
+		HSteamPipe hNewPipe = gInts.steamclient->CreateSteamPipe();
+		HSteamUser hNewUser = gInts.steamclient->ConnectToGlobalUser(hNewPipe);
+
+		gInts.steamfriends = reinterpret_cast<ISteamFriends002 *>(gInts.steamclient->GetISteamFriends(hNewUser, hNewPipe, STEAMFRIENDS_INTERFACE_VERSION_002));
+		gInts.steamuser = reinterpret_cast<ISteamUser017 *>(gInts.steamclient->GetISteamUser(hNewUser, hNewPipe, STEAMUSER_INTERFACE_VERSION_017));
 
 		XASSERT(gInts.Client);
 		XASSERT(gInts.EntList);
@@ -45,8 +54,13 @@ DWORD WINAPI dwMainThread( LPVOID lpArguments )
 		XASSERT(gInts.ModelInfo);
 		XASSERT(gInts.cvar);
 		XASSERT(gInts.EventManager);
+		XASSERT(gInts.steamclient);
+		XASSERT(gInts.steamfriends);
+		XASSERT(gInts.steamuser);
 		gInts.Engine->ClientCmd_Unrestricted("toggleconsole");
 		gInts.cvar->ConsoleColorPrintf(Color(253, 153, 32, 255), "NaCl Injected\n");
+		gInts.cvar->ConsoleColorPrintf(Color(15, 150, 150, 255), "Current Name: %s\n", gInts.steamfriends->GetPersonaName());
+
 
 		if( !gInts.Panels )
 		{

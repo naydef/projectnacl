@@ -17,6 +17,7 @@
 #include "CMenu.h"
 #include "studio.h"
 #include "ConVar.h"
+#include "SDK.h"
 
 
 using namespace std;
@@ -2228,6 +2229,9 @@ public:
 	}
 };
 
+#include "ISteamClient017.h"
+#include "ISteamFriends002.h"
+#include "ISteamUser017.h"
 class CInterfaces
 {
 public:
@@ -2243,6 +2247,9 @@ public:
 	IVModelInfo* ModelInfo;
 	IGameEventManager2* EventManager;	
 	IInputSystem* InputSys;
+	ISteamClient017* steamclient;
+	ISteamFriends002* steamfriends;
+	ISteamUser017* steamuser;
 };
 
 extern CInterfaces gInts;
