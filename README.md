@@ -8,6 +8,9 @@ The source is currently DETECTED but with junk code and vmprotect you should be 
 
 NaCl is a PASTE meaning I did not "code" any of this, when releasing a paste that uses NaCl please credit me and the people I credit on this github.
 
+## Community
+You can chat with other NaCl users in [our Discord Server](https://discord.gg/yRaEtnv).
+
 ## Overview
 
 NaCl is a potassium edit with new features such as
