@@ -46,7 +46,7 @@ void __fastcall Hooked_PaintTraverse( PVOID pPanels, int edx, unsigned int vguiP
 
 		if (vguiFocusOverlayPanel == vguiPanel )
 		{
-			if (gCvars.misc_cleanscreenshots && gInts.Engine->IsTakingScreenshot() || GetAsyncKeyState(VK_F12) || GetAsyncKeyState(VK_SNAPSHOT))
+			if (gCvars.misc_cleanscreenshots && gInts.Engine->IsTakingScreenshot() || gCvars.misc_cleanscreenshots && GetAsyncKeyState(VK_F12) || gCvars.misc_cleanscreenshots && GetAsyncKeyState(VK_SNAPSHOT))
 			    return;
 
 

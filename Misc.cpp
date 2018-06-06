@@ -161,7 +161,7 @@ void CMisc::Run(CBaseEntity* pLocal, CUserCmd* pCommand)
 	{
 		const std::vector<std::string> chatlines = {
 			"NaCl - Salty Bananas!",
-			"NaCl - www.github.com/waxxyTF2/NaClLite",
+			"NaCl - www.github.com/waxxyTF2/ProjectNaCl",
 			"NaCl - Open-Source TF2 Cheat",
 		};
 		std::chrono::time_point<std::chrono::system_clock> last_spam_point{};
