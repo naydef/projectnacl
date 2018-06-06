@@ -4,9 +4,6 @@
 
 The source is currently DETECTED but with junk code and vmprotect you should be good to go! :)
 
-## Community
-You can chat with other cathook users in [my official telegram group](https://t.me/nullifiedcat).
-
 ## Important
 
 NaCl is a PASTE meaning I did not "code" any of this, when releasing a paste that uses NaCl please credit me and the people I credit on this github.
