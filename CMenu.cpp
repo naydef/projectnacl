@@ -223,9 +223,6 @@ void CCheatMenu::Render(void)
 			    i = AddItem(i, "   > Key", &gCvars.misc_lagexploit_key, 0, 8, 1, false);
 			i = AddItem(i, "  * Noisemaker Spam", &gCvars.misc_noisemaker_spam, 0, 1, 1, false);
 		}
-
-
-
 	}
 
 	i = AddItem(i, "Time Shift", &gCvars.removecond_switch, 0, 1, 1, true);
