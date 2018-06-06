@@ -61,13 +61,13 @@ void __fastcall Hooked_PaintTraverse( PVOID pPanels, int edx, unsigned int vguiP
 			{
 				gDrawManager.DrawString(5, 5, Color::Green(), "%s", CHEATNAME);
 				gDrawManager.DrawString(5, 15, Color::Green(), "Build Date: %s", __DATE__);
-				gDrawManager.DrawString(5, 25, Color::Green(), "Build Status: Developer");
+				gDrawManager.DrawString(5, 25, Color::Green(), "Build Status: User");
 			}
 			else //The reason this is done is because the party "menu" at the top of your screen is in the way, so it draws under if not in game
 			{
 				gDrawManager.DrawString(5, 55, Color::Green(), "%s", CHEATNAME);
 				gDrawManager.DrawString(5, 65, Color::Green(), "Build Date: %s", __DATE__);
-				gDrawManager.DrawString(5, 75, Color::Green(), "Build Status: Developer");
+				gDrawManager.DrawString(5, 75, Color::Green(), "Build Status: User");
 			}
 
 			if (!pLocal)
