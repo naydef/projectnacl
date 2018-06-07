@@ -151,6 +151,7 @@ void CCheatMenu::Render(void)
 		{
 			i = AddItem(i, "   * Enemies Only", &gCvars.esp_enemyonly, 0, 1, 1, false);
 			i = AddItem(i, "   * Box", &gCvars.esp_box, 0, 1, 1, false);
+			i = AddItem(i, "   * Friends", &gCvars.esp_friends, 0, 1, 1, false);
 			i = AddItem(i, "   * Name", &gCvars.esp_name, 0, 1, 1, false);
 			i = AddItem(i, "   * Class", &gCvars.esp_class, 0, 1, 1, false);
 			i = AddItem(i, "   * Status", &gCvars.esp_status, 0, 1, 1, false);
@@ -218,21 +219,7 @@ void CCheatMenu::Render(void)
 			i = AddItem(i, "  * Chat Spam", &gCvars.misc_chatspam, 0, 1, 1, false);
 			if (gCvars.misc_chatspam)
 				i = AddItem(i, "   > New Lines", &gCvars.misc_chatspam_newlines, 0, 32, 1, false);
-			i = AddItem(i, "  * Server Lagger", &gCvars.misc_lagexploit, 0, 1, 1, false);
-			if (gCvars.misc_lagexploit)
-			    i = AddItem(i, "   > Key", &gCvars.misc_lagexploit_key, 0, 8, 1, false);
 			i = AddItem(i, "  * Noisemaker Spam", &gCvars.misc_noisemaker_spam, 0, 1, 1, false);
-		}
-	}
-
-	i = AddItem(i, "Time Shift", &gCvars.removecond_switch, 0, 1, 1, true);
-	if (gCvars.removecond_switch)
-	{
-		i = AddItem(i, " - Enabled", &gCvars.removecond_enabled, 0, 1, 1, false);
-		if (gCvars.removecond_enabled)
-		{
-			i = AddItem(i, "  * Value", &gCvars.removecond_value, 0, 4000, 100, false);
-			i = AddItem(i, "  * Key", &gCvars.removecond_key, 0, 8, 1, false);
 		}
 	}
 

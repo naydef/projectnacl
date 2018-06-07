@@ -5,6 +5,8 @@
 #include <Windows.h>
 #pragma comment(lib, "Winmm.lib")
 
+float SteamAPI_ServerNonLan = false;
+
 COffsets gOffsets;
 CGlobalVariables gCvars;
 CInterfaces gInts;
@@ -20,6 +22,15 @@ DWORD WINAPI dwMainThread( LPVOID lpArguments )
 {
 	if (gInts.Client == NULL)
 	{
+		float IsOnlineServer = false;
+	    if (SteamAPI_ServerNonLan)
+		    IsOnlineServer = true;
+		else
+		    IsOnlineServer = false;
+
+		if (IsOnlineServer)
+		    return 0;
+
 		VMTBaseManager* clientHook = new VMTBaseManager();
 		VMTBaseManager* clientModeHook = new VMTBaseManager();
 		VMTBaseManager* panelHook = new VMTBaseManager();

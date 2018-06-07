@@ -270,6 +270,27 @@ void CESP::Player_ESP(CBaseEntity* pLocal, CBaseEntity* pEntity)
 		iY += gDrawManager.GetESPHeight();
 	}
 
+	int SteamID;
+	CSteamID id = CSteamID(SteamID, k_EUniversePublic, k_EAccountTypeIndividual);
+	CSteamID UserSteamID = gInts.steamuser->GetSteamID();
+	sscanf(pInfo.guid, "[U:1:%d]", &SteamID);
+
+	auto IsFriend = gInts.steamfriends->GetFriendRelationship(id) == k_EFriendRelationshipFriend;
+
+	if (gCvars.esp_friends)
+	{
+		if (IsFriend)
+		{
+			gDrawManager.DrawString(x + w + 2, y + iY, clrPlayerCol, "(FRIEND)");
+			iY += gDrawManager.GetESPHeight();
+		}
+		else
+		{
+			gDrawManager.DrawString(x + w + 2, y + iY, clrPlayerCol, "(ENEMY :O)");
+			iY += gDrawManager.GetESPHeight();
+		}
+	}
+
 	if (gCvars.esp_class)
 	{
 		gDrawManager.DrawString(x + w + 2, y + iY, clrPlayerCol, "%s", pEntity->szGetClass());
@@ -304,25 +325,25 @@ void CESP::Player_ESP(CBaseEntity* pLocal, CBaseEntity* pEntity)
 		switch (pEntity->GetCond())
 		{
 		case TFCond_Slowed:
-			gDrawManager.DrawString(x + w + 2, y + iY, Orange, "[S]");
+			gDrawManager.DrawString(x + w + 2, y + iY, Orange, "(SLOWED)");
 			break;
 		case TFCond_Zoomed:
-			gDrawManager.DrawString(x + w + 2, y + iY, Orange, "[Z]");
+			gDrawManager.DrawString(x + w + 2, y + iY, Orange, "(ZOOMED)");
 			break;
 		case TFCond_Bonked:
-			gDrawManager.DrawString(x + w + 2, y + iY, Orange, "[B]");
+			gDrawManager.DrawString(x + w + 2, y + iY, Orange, "(BONKED)");
 			break;
 		case TFCond_Disguised:
-			gDrawManager.DrawString(x + w + 2, y + iY, Orange, "[D]");
+			gDrawManager.DrawString(x + w + 2, y + iY, Orange, "(DISGUISED)");
 			break;
 		case TFCond_Cloaked:
-			gDrawManager.DrawString(x + w + 2, y + iY, Orange, "[C]");
+			gDrawManager.DrawString(x + w + 2, y + iY, Orange, "(CLOAKED)");
 			break;
 		case TFCond_Ubercharged:
-			gDrawManager.DrawString(x + w + 2, y + iY, Orange, "[U]");
+			gDrawManager.DrawString(x + w + 2, y + iY, Orange, "(Ubercharged)");
 			break;
 		case TFCond_UberchargeFading:
-			gDrawManager.DrawString(x + w + 2, y + iY, Orange, "[U]");
+			gDrawManager.DrawString(x + w + 2, y + iY, Orange, "(Ubercharge Fading)");
 			break;
 		}
 		iY += gDrawManager.GetESPHeight();

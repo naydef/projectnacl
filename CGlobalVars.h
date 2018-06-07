@@ -57,6 +57,7 @@ public:
 	float esp_name;
 	float esp_status;
 	float esp_status_def;
+	float esp_friends;
 	float esp_class;
 	float esp_health;
 	float esp_bones;
