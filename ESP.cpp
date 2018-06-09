@@ -270,20 +270,6 @@ void CESP::Player_ESP(CBaseEntity* pLocal, CBaseEntity* pEntity)
 		iY += gDrawManager.GetESPHeight();
 	}
 
-	int SteamID;
-	CSteamID id = CSteamID(SteamID, k_EUniversePublic, k_EAccountTypeIndividual);
-	CSteamID UserSteamID = gInts.steamuser->GetSteamID();
-	sscanf(pInfo.guid, "[U:1:%d]", &SteamID);
-
-	if (gCvars.esp_friends)
-	{
-		if (gInts.steamfriends->GetFriendRelationship(id) == k_EFriendRelationshipFriend)
-		{
-			gDrawManager.DrawString(x + w + 2, y + iY, clrPlayerCol, "(FRIEND)");
-			iY += gDrawManager.GetESPHeight();
-		}
-	}
-
 	if (gCvars.esp_class)
 	{
 		gDrawManager.DrawString(x + w + 2, y + iY, clrPlayerCol, "%s", pEntity->szGetClass());
