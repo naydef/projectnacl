@@ -61,20 +61,24 @@ void __fastcall FrameStageNotifyThink(PVOID CHLClient, void *_this, ClientFrameS
 
 			Vector vX = entity->GetAngles();
 			Vector vY = entity->GetAnglesHTC();
-			auto *m_angEyeAnglesX = reinterpret_cast<float*>(reinterpret_cast<DWORD>(entity) + gNetVars.get_offset("DT_TFPlayer", "tfnonlocaldata", "m_angEyeAngles[0]"));
-			auto *m_angEyeAnglesY = reinterpret_cast<float*>(reinterpret_cast<DWORD>(entity) + gNetVars.get_offset("DT_TFPlayer", "tfnonlocaldata", "m_angEyeAngles[1]"));
+			auto *WritePitch = reinterpret_cast<float*>(reinterpret_cast<DWORD>(entity) + gNetVars.get_offset("DT_TFPlayer", "tfnonlocaldata", "m_angEyeAngles[0]"));
+			auto *WriteYaw = reinterpret_cast<float*>(reinterpret_cast<DWORD>(entity) + gNetVars.get_offset("DT_TFPlayer", "tfnonlocaldata", "m_angEyeAngles[1]"));
 			if (gCvars.aimbot_resolver)
 			{
-				if (gCvars.aimbot_resolver_fakeup) //idk why I'm doing it like this but I'm tired af.
+				if (!Util->IsKeyPressed(gCvars.aimbot_key))
+				    return;
+
+				if (vX.x == -89.0f) 
 				{
-					if (vX.x == 90) //This is a sample resolver, do more yourself if you'd like. (Fake up resolver)
-					{
-						*m_angEyeAnglesX = -89;
-					}
+					*WritePitch = 90.0f;
 				}
+				if (vX.x == 89.0f) 
+				{
+					*WritePitch = -90.0f;
+				}	
 			}
 		}
-	}
+   }
 
 	if (gInts.Engine->IsInGame() && Stage == FRAME_RENDER_START)
 	{

@@ -101,7 +101,7 @@ public:
 	float misc_claymode;
 	float misc_speedcrouch;
 	float aimbot_resolver;
-	float aimbot_resolver_fakeup;
+	float aimbot_resolver_key;
 	float hvh_switch;
 	float hvh_aaswitch;
 	float hvh_aap;
