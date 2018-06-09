@@ -87,7 +87,7 @@ void __fastcall Hooked_PaintTraverse( PVOID pPanels, int edx, unsigned int vguiP
 
 			if (gInts.Engine->IsInGame() && gInts.Engine->IsConnected() && gCvars.misc_noscope_drawlines)
 			{
-			   if (!gCvars.misc_nozoom || !gCvars.vismisc_active)
+			   if (!gCvars.misc_noscope || !gCvars.vismisc_active)
 			     return;
 
 				if (pLocal->GetLifeState() == LIFE_ALIVE && pLocal->GetCond() & tf_cond::TFCond_Zoomed)
