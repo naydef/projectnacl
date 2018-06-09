@@ -151,7 +151,6 @@ void CCheatMenu::Render(void)
 		{
 			i = AddItem(i, "   * Enemies Only", &gCvars.esp_enemyonly, 0, 1, 1, false);
 			i = AddItem(i, "   * Box", &gCvars.esp_box, 0, 1, 1, false);
-			i = AddItem(i, "   * Friends", &gCvars.esp_friends, 0, 1, 1, false);
 			i = AddItem(i, "   * Name", &gCvars.esp_name, 0, 1, 1, false);
 			i = AddItem(i, "   * Class", &gCvars.esp_class, 0, 1, 1, false);
 			i = AddItem(i, "   * Status", &gCvars.esp_status, 0, 1, 1, false);
