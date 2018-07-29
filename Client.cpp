@@ -8,6 +8,15 @@
 #include "HvH.h"
 #include "AutoAirblast.h"
 Vector qLASTTICK;
+
+bool Key(INT vKey)
+{
+	if (GetAsyncKeyState(vKey) & 1)
+		return true;
+
+	return false;
+}
+
 //============================================================================================
 bool __fastcall Hooked_CreateMove(PVOID ClientMode, int edx, float input_sample_frametime, CUserCmd* pCommand)
 {
@@ -63,11 +72,12 @@ void __fastcall FrameStageNotifyThink(PVOID CHLClient, void *_this, ClientFrameS
 			Vector vY = entity->GetAnglesHTC();
 			auto *WritePitch = reinterpret_cast<float*>(reinterpret_cast<DWORD>(entity) + gNetVars.get_offset("DT_TFPlayer", "tfnonlocaldata", "m_angEyeAngles[0]"));
 			auto *WriteYaw = reinterpret_cast<float*>(reinterpret_cast<DWORD>(entity) + gNetVars.get_offset("DT_TFPlayer", "tfnonlocaldata", "m_angEyeAngles[1]"));
+			if (Util->IsKeyPressed(gCvars.aimbot_resolver_key)) //insert
+			{
+				gCvars.aimbot_resolver_key = !gCvars.aimbot_resolver_key;
+			}
 			if (gCvars.aimbot_resolver)
 			{
-				if (!Util->IsKeyPressed(gCvars.aimbot_key))
-				    return;
-
 				if (vX.x == -89.0f) 
 				{
 					*WritePitch = 90.0f;
