@@ -197,7 +197,7 @@ void CCheatMenu::Render(void)
 		i = AddItem(i, " - Resolver", &gCvars.aimbot_resolver, 0, 1, 1, false);
 		if (gCvars.aimbot_resolver)
 		{
-			i = AddItem(i, "  * On Key", &gCvars.aimbot_resolver_key, 0, 8, 1, false);
+			i = AddItem(i, "  * Toggle Key", &gCvars.aimbot_resolver_key, 0, 8, 1, false);
 		}
 	}
 
