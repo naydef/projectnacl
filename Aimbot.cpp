@@ -120,24 +120,6 @@ void CAimbot::Run(CBaseEntity* pLocal, CUserCmd* pCommand)
 		|| id == (int)scoutweapons::WPN_MutatedMilk
 		|| id == (int)scoutweapons::WPN_WrapAssassin
 #pragma endregion
-#pragma region soldier
-		|| id == (int)soldierweapons::WPN_RocketLauncher
-		|| id == (int)soldierweapons::WPN_FestiveRocketLauncher
-		|| id == (int)soldierweapons::WPN_Airstrike
-		|| id == (int)soldierweapons::WPN_BattalionBackup
-		|| id == (int)soldierweapons::WPN_BeggersBazooka
-		|| id == (int)soldierweapons::WPN_BlackBox
-		|| id == (int)soldierweapons::WPN_FestiveBlackbox
-		|| id == (int)soldierweapons::WPN_BuffBanner
-		|| id == (int)soldierweapons::WPN_FestiveBuffBanner
-		|| id == (int)soldierweapons::WPN_Concheror
-		|| id == (int)soldierweapons::WPN_CowMangler
-		|| id == (int)soldierweapons::WPN_DirectHit
-		|| id == (int)soldierweapons::WPN_LibertyLauncher
-		|| id == (int)soldierweapons::WPN_Original
-		|| id == (int)soldierweapons::WPN_RighteousBison
-		|| id == (int)soldierweapons::WPN_RocketJumper
-#pragma endregion
 #pragma region pyro
 		|| id == (int)pyroweapons::WPN_Detonator
 		|| id == (int)pyroweapons::WPN_FestiveFlaregun
@@ -230,6 +212,27 @@ void CAimbot::Run(CBaseEntity* pLocal, CUserCmd* pCommand)
 	Vector vLocal = pLocal->GetEyePosition();
 
 	Vector vAngs;
+	
+	auto pWeap = pLocal->GetActiveWeapon(); if (!pWeap) return;
+	auto pSoldier = (pLocal->GetClassNum() == TF2_Soldier && pWeap->GetSlot() == 0);
+	if (pSoldier)
+	{
+		bool ponGround = pEntity->GetFlags() & FL_ONGROUND;
+
+		vEntity = pEntity->GetAbsOrigin(); vEntity[2] += 10.0f;
+
+		auto projectile_speed = pWeap->GetItemDefinitionIndex() == WPN_DirectHit ? 1980.0f : 1100.0f;
+		auto predicted_time = ((pLocal->GetEyePosition().DistTo(vEntity) / projectile_speed) + gInts.globals->interval_per_tick);
+
+		Vector AbsVel = Util->EstimateAbsVelocity(pEntity);
+		AbsVel[2] += -gInts.cvar->FindVar("sv_gravity")->GetFloat() * gInts.globals->interval_per_tick * gInts.globals->interval_per_tick;
+
+		vEntity[0] += (AbsVel[0] * predicted_time) + gInts.globals->interval_per_tick;
+		vEntity[1] += (AbsVel[1] * predicted_time) + gInts.globals->interval_per_tick;
+		vEntity[2] += (ponGround ? (AbsVel[2] * predicted_time) + gInts.globals->interval_per_tick :
+			(0.5 * pow(predicted_time, 2) + AbsVel[2] * predicted_time)) + gInts.globals->interval_per_tick;
+	}
+	
 	VectorAngles((vEntity - vLocal), vAngs);
 
 	ClampAngle(vAngs);
