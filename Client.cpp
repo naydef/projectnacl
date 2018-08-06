@@ -74,7 +74,7 @@ void __fastcall FrameStageNotifyThink(PVOID CHLClient, void *_this, ClientFrameS
 			auto *WriteYaw = reinterpret_cast<float*>(reinterpret_cast<DWORD>(entity) + gNetVars.get_offset("DT_TFPlayer", "tfnonlocaldata", "m_angEyeAngles[1]"));
 			if (Util->IsKeyPressed(gCvars.aimbot_resolver_key)) //insert
 			{
-				gCvars.aimbot_resolver_key = !gCvars.aimbot_resolver_key;
+				gCvars.aimbot_resolver = !gCvars.aimbot_resolver;
 			}
 			if (gCvars.aimbot_resolver)
 			{
